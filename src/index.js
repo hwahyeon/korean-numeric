@@ -89,10 +89,12 @@ function totalNumberAddition(list) {
   return addition;
 }
 
-console.log(
-  totalNumberAddition(
-    splitKoreanNumber(
-      replaceKoreanNumbers(removeNonNumericWords("7십팔만 육천원"))
-    )
-  )
-);
+function tonumber(input) {
+  return totalNumberAddition(
+    splitKoreanNumber(replaceKoreanNumbers(removeNonNumericWords(input)))
+  );
+}
+
+module.exports = {
+  tonumber
+};
