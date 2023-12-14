@@ -1,0 +1,26 @@
+{
+  "name": "korean-numeric",
+  "version": "1.0.1",
+  "description": "한글로 작성된 수를 아라비아 숫자로 반환하는 NPM 패키지",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwahyeon/korean-numeric.git"
+  },
+  "keywords": [
+    "korean",
+    "hangul",
+    "number",
+    "한글",
+    "숫자"
+  ],
+  "author": "hwahyeon <hwahyeon.dev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hwahyeon/korean-numeric/issues"
+  },
+  "homepage": "https://github.com/hwahyeon/korean-numeric#readme"
+}
