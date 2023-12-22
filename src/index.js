@@ -1,3 +1,7 @@
+const UNIT_JO = 1000000000000;
+const UNIT_EOK = 100000000;
+const UNIT_MAN = 10000;
+
 // 숫자, 숫자 관련 문자 외의 문자 제거
 function removeNonNumericWords(input) {
   const numericWordsRegex = /[^\d십백천만억조일이삼사오육칠팔구]/g;
@@ -67,20 +71,20 @@ function totalNumberAddition(list) {
       case "조":
         addition +=
           item === "조"
-            ? 1000000000000
-            : convertKoreanNumber(item.slice(0, -1)) * 100000000;
+            ? UNIT_JO
+            : convertKoreanNumber(item.slice(0, -1)) * UNIT_EOK;
         break;
       case "억":
         addition +=
           item === "억"
-            ? 100000000
-            : convertKoreanNumber(item.slice(0, -1)) * 100000000;
+            ? UNIT_EOK
+            : convertKoreanNumber(item.slice(0, -1)) * UNIT_EOK;
         break;
       case "만":
         addition +=
           item === "만"
-            ? 10000
-            : convertKoreanNumber(item.slice(0, -1)) * 10000;
+            ? UNIT_MAN
+            : convertKoreanNumber(item.slice(0, -1)) * UNIT_MAN;
         break;
       default:
         addition += convertKoreanNumber(item);
@@ -90,6 +94,10 @@ function totalNumberAddition(list) {
 }
 
 function tonumber(input) {
+  if (typeof input !== 'string') {
+    input = String(input);
+  }
+
   return totalNumberAddition(
     splitKoreanNumber(replaceKoreanNumbers(removeNonNumericWords(input)))
   );
