@@ -2,13 +2,23 @@ const UNIT_JO = 1000000000000;
 const UNIT_EOK = 100000000;
 const UNIT_MAN = 10000;
 
-// 숫자, 숫자 관련 문자 외의 문자 제거
+/**
+ * Removes non-numeric and non-Korean number words from the input string.
+ * 
+ * @param {string} input - The input string to process.
+ * @returns {string} The processed string with only numeric and Korean number words.
+ */
 function removeNonNumericWords(input) {
   const numericWordsRegex = /[^\d십백천만억조일이삼사오육칠팔구]/g;
   return input.replace(numericWordsRegex, "");
 }
 
-// 일-구 -> 1-9 변경
+/**
+ * Converts Korean number words (일-구) to their corresponding Arabic numerals (1-9).
+ * 
+ * @param {string} input - The string containing Korean number words.
+ * @returns {string} The string with Korean number words replaced by Arabic numerals.
+ */
 function replaceKoreanNumbers(input) {
   const numberMap = {
     일: "1",
@@ -27,7 +37,12 @@ function replaceKoreanNumbers(input) {
     .join("");
 }
 
-// '억', '만', '천', '백', '십' 단위로 잘라 list로 만들기
+/**
+ * Splits a Korean number string into parts based on units like '억', '만', '천', '백', '십'.
+ * 
+ * @param {string} input - The Korean number string to split.
+ * @returns {string[]} An array of split parts of the Korean number.
+ */
 function splitKoreanNumber(input) {
   const regex = /(?:(.*억)?(.*만)?(.*천)?(.*백)?(.*십)?(.*))?/;
 
@@ -38,7 +53,12 @@ function splitKoreanNumber(input) {
   return matches.filter((part) => part);
 }
 
-// 0 - 9천9백9십9구 convert to Arabic number 0 - 9999
+/**
+ * Converts a string containing a Korean number in units (0 to 9999) to an Arabic numeral.
+ * 
+ * @param {string} input - The Korean number string to convert.
+ * @returns {number} The Arabic numeral equivalent of the Korean number.
+ */
 function convertKoreanNumber(input) {
   const units = { 천: 1000, 백: 100, 십: 10 };
   input = input.replace(/(?<!\d)(천|백|십)/g, "1$1");
@@ -62,6 +82,12 @@ function convertKoreanNumber(input) {
   return result;
 }
 
+/**
+ * Calculates the total sum of an array of Korean number strings.
+ * 
+ * @param {string[]} list - An array of Korean number strings.
+ * @returns {number} The total sum of the numbers in the array.
+ */
 function totalNumberAddition(list) {
   let addition = 0;
   list.forEach((item) => {
@@ -93,6 +119,12 @@ function totalNumberAddition(list) {
   return addition;
 }
 
+/**
+ * Converts a Korean number string to its Arabic numeral equivalent.
+ * 
+ * @param {any} input - The input to convert. If not a string, it will be converted to one.
+ * @returns {number} The Arabic numeral equivalent of the input.
+ */
 function tonumber(input) {
   if (typeof input !== 'string') {
     input = String(input);
