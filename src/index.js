@@ -3,19 +3,34 @@ const UNIT_EOK = 100000000;
 const UNIT_MAN = 10000;
 
 /**
- * Removes non-numeric and non-Korean number words from the input string.
- * 
+ * Removes non-numeric and non-Korean number words from the input string and splits it
+ * into two parts: the left part representing the integer and the right part representing
+ * the fractional part separated by a '.' or '점' (dot).
+ *
  * @param {string} input - The input string to process.
- * @returns {string} The processed string with only numeric and Korean number words.
+ * @returns {[string, string]} An array containing two strings. The first string
+ * represents the integer part of the input string, and the second string represents
+ * the fractional part. If no fractional part exists, the second string will be an empty string.
  */
 function removeNonNumericWords(input) {
-  const numericWordsRegex = /[^\d십백천만억조일이삼사오육칠팔구]/g;
-  return input.replace(numericWordsRegex, "");
+  const stringWithDots = input.replace(/점/g, ".");
+  const numericWordsRegex = /[^\d십백천만억조일이삼사오육칠팔구.]+/g;
+  const cleanedString = stringWithDots.replace(numericWordsRegex, "");
+
+  // Keep only the '.' at the very beginning of the sentence and remove the rest.
+  const firstDotIndex = cleanedString.indexOf(".");
+  if (firstDotIndex >= 0) {
+    const leftPart = cleanedString.slice(0, firstDotIndex);
+    const rightPart = cleanedString.slice(firstDotIndex + 1).replace(/\./g, "");
+    return [leftPart, rightPart];
+  } else {
+    return [cleanedString, ""];
+  }
 }
 
 /**
  * Converts Korean number words (일-구) to their corresponding Arabic numerals (1-9).
- * 
+ *
  * @param {string} input - The string containing Korean number words.
  * @returns {string} The string with Korean number words replaced by Arabic numerals.
  */
@@ -39,23 +54,23 @@ function replaceKoreanNumbers(input) {
 
 /**
  * Splits a Korean number string into parts based on units like '억', '만', '천', '백', '십'.
- * 
+ *
  * @param {string} input - The Korean number string to split.
  * @returns {string[]} An array of split parts of the Korean number.
  */
 function splitKoreanNumber(input) {
   const regex = /(?:(.*억)?(.*만)?(.*천)?(.*백)?(.*십)?(.*))?/;
 
-  // 정규 표현식을 사용하여 입력 문자열을 나눔
+  // Split the input string using regular expressions.
   const matches = input.match(regex).slice(1);
 
-  // 필터링하여 빈 문자열이 아닌 부분만 배열로 반환
+  // Return as an array after filtering out non-empty parts.
   return matches.filter((part) => part);
 }
 
 /**
  * Converts a string containing a Korean number in units (0 to 9999) to an Arabic numeral.
- * 
+ *
  * @param {string} input - The Korean number string to convert.
  * @returns {number} The Arabic numeral equivalent of the Korean number.
  */
@@ -74,7 +89,7 @@ function convertKoreanNumber(input) {
     }
   });
 
-  // 남은 숫자가 있다면 결과에 추가
+  // If there are remaining numbers, add them to the result.
   if (input.length > 0) {
     result += parseInt(input, 10);
   }
@@ -84,14 +99,14 @@ function convertKoreanNumber(input) {
 
 /**
  * Calculates the total sum of an array of Korean number strings.
- * 
+ *
  * @param {string[]} list - An array of Korean number strings.
  * @returns {number} The total sum of the numbers in the array.
  */
 function totalNumberAddition(list) {
   let addition = 0;
   list.forEach((item) => {
-    const lastChar = item[item.length - 1]; // 항목의 마지막 글자
+    const lastChar = item[item.length - 1];
 
     switch (lastChar) {
       case "조":
@@ -121,20 +136,26 @@ function totalNumberAddition(list) {
 
 /**
  * Converts a Korean number string to its Arabic numeral equivalent.
- * 
+ *
  * @param {any} input - The input to convert. If not a string, it will be converted to one.
  * @returns {number} The Arabic numeral equivalent of the input.
  */
 function tonumber(input) {
-  if (typeof input !== 'string') {
+  if (typeof input !== "string") {
     input = String(input);
   }
 
-  return totalNumberAddition(
-    splitKoreanNumber(replaceKoreanNumbers(removeNonNumericWords(input)))
+  const [left, right] = removeNonNumericWords(input);
+
+  const constants = totalNumberAddition(
+    splitKoreanNumber(replaceKoreanNumbers(left))
   );
+
+  const decimal = replaceKoreanNumbers(right);
+
+  return Number(constants.toString() + "." + decimal.toString());
 }
 
 module.exports = {
-  tonumber
+  tonumber,
 };

@@ -32,6 +32,14 @@ console.log(typeof(korNum.tonumber("2억"))) // number
   console.log(korNum.tonumber("7십팔만 6천원")) // 786000
   console.log(korNum.tonumber("5십오만"))       // 550000
 ```
+### 소수점
+```javascript
+  console.log(korNum.tonumber("3십만점칠칠"))  // 300000.77
+  console.log(korNum.tonumber("3십만.칠칠"))   // 300000.77
+  console.log(korNum.tonumber("1.0987.01"))   // 1.098701
+  console.log(korNum.tonumber('이십.구점5'))   // 20.95
+```
+- 맨 처음에 오는 '점' 혹은 '.' 문자를 인식합니다. '점'과 '.'이 여러 개여도 오로지 맨 처음에 오는 문자를 소수점 기준으로 삼습니다.
 ### 기타 사항
 ```javascript
   console.log(korNum.tonumber("기백만원"))   // 1000000
