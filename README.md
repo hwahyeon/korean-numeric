@@ -32,7 +32,7 @@ console.log(typeof(korNum.tonumber("2억"))) // number
   console.log(korNum.tonumber("7십팔만 6천원")) // 786000
   console.log(korNum.tonumber("5십오만"))       // 550000
 ```
-### 소수점
+### Decimal points
 ```javascript
   console.log(korNum.tonumber("3십만점칠칠"))  // 300000.77
   console.log(korNum.tonumber("3십만.칠칠"))   // 300000.77
@@ -55,12 +55,12 @@ console.log(typeof(korNum.tonumber("2억"))) // number
 
 ## API
 ### `tonumber(input)`
-한국어로 표현된 숫자 문자열을 아라비아 숫자(정수)로 변환하는 함수입니다. 이 함수는 한국어 숫자를 일반적인 숫자로 변환하는 모든 단계를 내부적으로 처리합니다.
+This function converts a Korean numeral string into an Arabic numeral. It internally handles all the steps required to transform Korean numerals into their conventional numeric counterparts.
 
 - **Parameters**
-  - `input` (string): 변환할 한국어 숫자 문자열.
+  - `input` (string): The Korean numeral string to convert.
 - **Returns**
-  - (number): 한국어 숫자 문자열이 아라비아 숫자로 변환된 값.
+  - (number): The value of the Korean numeral string converted into an Arabic numeral.
 
 ## License
 This project is provided under the MIT License.
