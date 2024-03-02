@@ -3,7 +3,7 @@
 - ①한글로 작성된 수, ②구어체로 된 수, ③한글과 아라비아 숫자가 혼용된 수 등을 지원합니다.
 - 조 단위까지의 수를 지원합니다.
 - 음성 인식 기능, 챗봇, 환율 계산기 등의 환경에서 편리하게 사용할 수 있습니다.
-<br/>
+  
 - It supports ① numbers written in Hangul, ② numbers in spoken language form, and ③ numbers that mix Hangul and Arabic numerals.
 - It supports numbers up to the unit of 조 (10,000,000,000).
 - It can be conveniently used in environments such as voice recognition features, chatbots, and currency converters.
