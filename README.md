@@ -25,16 +25,21 @@ import korNum from 'korean-numeric'
 console.log(korNum.tonumber("2억")) // 200000000
 console.log(typeof(korNum.tonumber("2억"))) // number
 ```
-### 한글로 작성된 수
+### Numbers written in Hangul
 ```javascript
   console.log(korNum.tonumber("삼십만"))   // 300000
   console.log(korNum.tonumber("사십 만"))  // 400000
   console.log(korNum.tonumber("오 십 만")) // 500000
 ```
-### 한글과 아라비아 숫자가 혼용된 수
+### Numbers mixed with Hangul and Arabic numerals
 ```javascript
   console.log(korNum.tonumber("7십팔만 6천원")) // 786000
   console.log(korNum.tonumber("5십오만"))       // 550000
+```
+### Numbers in colloquial form
+```javascript
+  console.log(korNum.tonumber("만원")) // 10000
+  console.log(korNum.tonumber("일이삼사, 오육칠팔")) // 12345678
 ```
 ### Decimal points
 ```javascript
@@ -43,19 +48,15 @@ console.log(typeof(korNum.tonumber("2억"))) // number
   console.log(korNum.tonumber("1.0987.01"))   // 1.098701
   console.log(korNum.tonumber('이십.구점5'))   // 20.95
 ```
-- 맨 처음에 오는 '점' 혹은 '.' 문자를 인식합니다. '점'과 '.'이 여러 개여도 오로지 맨 처음에 오는 문자를 소수점 기준으로 삼습니다.
-### 기타 사항
+- 맨 처음에 오는 '점' 혹은 '.' 문자를 인식합니다. '점'과 '.'이 여러 개여도 오로지 맨 처음에 오는 문자를 소수점 기준으로 삼습니다. <br/> It recognizes the first 'dot' or '.' character as the decimal point. Even if there are multiple 'dots' or '.', only the first one is considered as the decimal point.
+### Other details
 ```javascript
   console.log(korNum.tonumber("기백만원"))   // 1000000
   console.log(korNum.tonumber("우노 도스 트레")) // 0
 ```
 - 숫자와 관련없는 글자는 삭제됩니다. <br> Removes non-numeric characters
 - 데이터가 없으면 0을 반환합니다. <br> Returns 0 if there is no data
-### 구어체로 된 수
-```javascript
-  console.log(korNum.tonumber("만원")) // 10000
-  console.log(korNum.tonumber("일이삼사, 오육칠팔")) // 12345678
-```
+
 
 ## API
 ### `tonumber(input)`
