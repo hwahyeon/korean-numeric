@@ -20,7 +20,7 @@ function removeNonNumericWords(input) {
   // Keep only the '.' at the very beginning of the sentence and remove the rest.
   const firstDotIndex = cleanedString.indexOf(".");
   if (firstDotIndex >= 0) {
-    const leftPart = cleanedString.slice(0, firstDotIndex);
+    const leftPart = firstDotIndex === 0 ? "0" : cleanedString.slice(0, firstDotIndex);
     const rightPart = cleanedString.slice(firstDotIndex + 1).replace(/\./g, "");
     return [leftPart, rightPart];
   } else {
