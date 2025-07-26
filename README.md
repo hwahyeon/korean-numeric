@@ -1,12 +1,11 @@
 # korean-numeric
-**korean-numeric**는 한글로 표기된 수를 아라비아 숫자로 변경하는 JavaScript 라이브러리입니다. <br> **korean-numeric** is a JavaScript Library that converts numbers expressed in Korean text to Arabic numbers.
-- ①한글로 작성된 수, ②구어체로 된 수, ③한글과 아라비아 숫자가 혼용된 수 등을 지원합니다.
-- 조 단위까지의 수를 지원합니다.
-- 음성 인식 기능, 챗봇, 환율 계산기 등의 환경에서 편리하게 사용할 수 있습니다.
-  <br/><br/>  
-- It supports ① numbers written in Hangul, ② numbers in spoken language form, and ③ numbers that mix Hangul and Arabic numerals.
-- It supports numbers up to the unit of 조 (10,000,000,000).
-- It can be conveniently used in environments such as voice recognition features, chatbots, and currency converters.
+
+**korean-numeric**는 한글 숫자와 일상적인 수 표현(한글, 구어체, 숫자 혼용)을 아라비아 숫자로 변환하는 JavaScript 라이브러리입니다.
+
+**korean-numeric** is a JavaScript library that converts Korean numbers written in Hangul, spoken form, or mixed with digits into Arabic numerals.
+
+- Handles values up to 조 (1 trillion)
+- Suitable for voice recognition, chatbots, and financial tools
 
 ## Installation
 
@@ -15,51 +14,69 @@ npm install korean-numeric
 ```
 
 ## Usage
-```javascript
-const korNum = require('korean-numeric');
-console.log(korNum.tonumber("2억")) // 200000000
-```
-OR
-```javascript
-import korNum from 'korean-numeric'
-console.log(korNum.tonumber("2억")) // 200000000
-console.log(typeof(korNum.tonumber("2억"))) // number
-```
-### Numbers written in Hangul
-```javascript
-  console.log(korNum.tonumber("삼십만"))   // 300000
-  console.log(korNum.tonumber("사십 만"))  // 400000
-  console.log(korNum.tonumber("오 십 만")) // 500000
-```
-### Numbers mixed with Hangul and Arabic numerals
-```javascript
-  console.log(korNum.tonumber("7십팔만 6천원")) // 786000
-  console.log(korNum.tonumber("5십오만"))       // 550000
-```
-### Numbers in colloquial form
-```javascript
-  console.log(korNum.tonumber("만원")) // 10000
-  console.log(korNum.tonumber("일이삼사, 오육칠팔")) // 12345678
-```
-### Decimal points
-```javascript
-  console.log(korNum.tonumber("3십만점칠칠"))  // 300000.77
-  console.log(korNum.tonumber("3십만.칠칠"))   // 300000.77
-  console.log(korNum.tonumber("1.0987.01"))   // 1.098701
-  console.log(korNum.tonumber('이십.구점5'))   // 20.95
-```
-- 맨 처음에 오는 '점' 혹은 '.' 문자를 인식합니다. '점'과 '.'이 여러 개여도 오로지 맨 처음에 오는 문자를 소수점 기준으로 삼습니다. <br/> It recognizes the first 'dot' or '.' character as the decimal point. Even if there are multiple 'dots' or '.', only the first one is considered as the decimal point.
-### Other details
-```javascript
-  console.log(korNum.tonumber("기백만원"))   // 1000000
-  console.log(korNum.tonumber("우노 도스 트레")) // 0
-```
-- 숫자와 관련없는 글자는 삭제됩니다. <br> Removes non-numeric characters
-- 데이터가 없으면 0을 반환합니다. <br> Returns 0 if there is no data
 
+### CommonJS
+
+```javascript
+const korNum = require("korean-numeric");
+console.log(korNum.tonumber("2억")); // 200000000
+```
+
+### ES Modules
+
+```javascript
+import korNum from "korean-numeric";
+console.log(korNum.tonumber("2억")); // 200000000
+console.log(typeof korNum.tonumber("2억")); // number
+```
+
+### Numbers written in Hangul
+
+```javascript
+console.log(korNum.tonumber("삼십만")); // 300000
+console.log(korNum.tonumber("사십 만")); // 400000
+console.log(korNum.tonumber("오 십 만")); // 500000
+```
+
+### Numbers mixed with Hangul and Arabic numerals
+
+```javascript
+console.log(korNum.tonumber("7십팔만 6천원")); // 786000
+console.log(korNum.tonumber("5십오만")); // 550000
+```
+
+### Numbers in colloquial form
+
+```javascript
+console.log(korNum.tonumber("만원")); // 10000
+console.log(korNum.tonumber("일이삼사, 오육칠팔")); // 12345678
+```
+
+### Decimal points
+
+```javascript
+console.log(korNum.tonumber("3십만점칠칠")); // 300000.77
+console.log(korNum.tonumber("3십만.칠칠")); // 300000.77
+console.log(korNum.tonumber("1.0987.01")); // 1.098701
+console.log(korNum.tonumber("이십.구점5")); // 20.95
+```
+
+- It recognizes the first '점' or '.' character as the decimal point. Even if there are multiple '점' or '.', only the first one is considered as the decimal point.
+
+### Other details
+
+```javascript
+console.log(korNum.tonumber("기백만원")); // 1000000
+console.log(korNum.tonumber("우노 도스 트레")); // 0
+```
+
+- Removes non-numeric characters
+- Returns 0 if there is no data
 
 ## API
+
 ### `tonumber(input)`
+
 This function converts a Korean numeral string into an Arabic numeral. It internally handles all the steps required to transform Korean numerals into their conventional numeric counterparts.
 
 - **Parameters**
@@ -68,4 +85,5 @@ This function converts a Korean numeral string into an Arabic numeral. It intern
   - (number): The value of the Korean numeral string converted into an Arabic numeral.
 
 ## License
+
 This project is provided under the MIT License.
