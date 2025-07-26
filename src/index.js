@@ -113,7 +113,7 @@ function totalNumberAddition(list) {
         addition +=
           item === "조"
             ? UNIT_JO
-            : convertKoreanNumber(item.slice(0, -1)) * UNIT_EOK;
+            : convertKoreanNumber(item.slice(0, -1)) * UNIT_JO;
         break;
       case "억":
         addition +=
